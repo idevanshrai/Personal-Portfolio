@@ -145,7 +145,7 @@ nav ul li a:hover::after{
     transition: 0.5s;
 }
 
-.tab-titles.active-link::after{
+.tab-links.active-link::after{
     width: 50%;
 }
 
