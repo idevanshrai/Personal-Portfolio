@@ -89,6 +89,43 @@ nav ul li a:hover::after{
 
 }
 
+/*Typing Effect */
+
+.typing-effect {
+    border-right: 2px solid #ff004f;
+    font-size: 40px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    animation: caret 0.75s step-end infinite;
+  }
+  
+  @keyframes caret {
+    50% {
+      border-color: transparent;
+    }
+  }
+
+
+
+
+  .typing-effect::after {
+    content: '';
+    display: inline-block;
+    width: 2px; /* Width of the cursor */
+    height: 1em; /* Height to match the text */
+    background-color: #ff004f; /* Cursor color */
+    animation: blink 1s step-end infinite; /* Blinking effect */
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+
 
 /*-------------about-------------------*/
 #about{

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio Website</title>
+    <title>DevanshRai</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/22a88b6823.js" crossorigin="anonymous"></script>
 </head>
@@ -25,8 +25,8 @@
                 <i class="fas fa-bars" onclick="openmenu()"></i>
             </nav>
             <div class="header-text">
-                <p>Software Developer</p>
-                <h1>Hi, I'm <span>Devansh</span><br>From India</h1>
+                <h1>Hi, I'm <span>Devansh</span><br>
+                    <span class="typing-effect" style="color: #FFFFFF;"></span></h1>                  
                 <p>I'm a Software Developer and an open-source enthusiast, <br> currently pursuing Computer Science at VIT</p>
                 <div class="social-icons">
                         <a href="https://www.linkedin.com/in/devansh-rai-210149214/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
@@ -51,30 +51,56 @@
                     <p>A proficient Computer Science undergraduate with a solid six-year background in Java programming. Skilled in video editing, robotics, and designing digital posters and banners. Demonstrates strong leadership abilities, currently excelling as the Social Media Manager at CodeDay Lucknow, showcasing expertise in online platform management. Exhibits a profound passion for technology and actively seeks new challenges for continuous personal and professional growth.</p>
 
                     <div class="tab-titles">
-                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                        <p class="tab-links active-link" onclick="opentab('skills')" style="color:#FFFFFF ">Skills</p>
+                        <p class="tab-links" onclick="opentab('education')" style="color: #FFFFFF;">Educational Experience</p>
+                        <p class="tab-links" onclick="opentab('experience')" style="color:#FFFFFF ">Professional Experience</p>
                     </div>
                     <div class="tab-contents active-tab" id="skills">
                         <ul>
-                            <li><span>UI/UX</span><br>Designing Web interfaces</li>
-                            <li><span>Visual media production</span><br>Photography and Video Editing</li>
-                            <li><span>Robotics</span><br>Designing and making robots</li>
+                            <li><span style="font-size: 16px;">Software Development</span><br>Java, Python, C++, App Development and Web Development</li>
+                            <li><span style="font-size: 16px;">UI/UX</span><br>Designing Web interfaces</li>
+                            <li><span style="font-size: 16px;">Visual Media Production</span><br>Photography and Video Editing</li>
+                            <li><span style="font-size: 16px;">Robotics</span><br>Designing and making robots</li>
                         </ul>
                     </div>
 
                     <div class="tab-contents" id="experience">
                         <ul>
-                            <li><span>2024 - Present</span><br>Social Media Manager at CodeDay Lucknow</li>
-                            <li><span>2024 - Present</span><br>Student Developer at GDSC VIT Bhopal</li>
-                            <li><span>2024 - Present</span><br>Core Member of IoT Club at VIT Bhopal</li>
+                            <li><span style="font-size: 16px;">2024 - Present</span><br>Google Developer Group- Student Developer</li>
+                            <li><span style="font-size: 16px;">2024 - Present</span><br>CodeDay Lucknow- Social Media Manager & Volunteer</li>
+                            <li><span style="font-size: 16px;">2024 - Present</span><br>IoT Club | VIT | Core Member</li>
+                            <li><span style="font-size: 16px;">2024 - Present</span><br>Eureka Club | VIT | Core Member</li>
                         </ul>
                     </div>
 
                     <div class="tab-contents" id="education">
                         <ul>
-                            <li><span>2023 - Present</span><br>Undergraduate student at Vellore Institute of Technology, Bhopal University</li>
-                            <li><span>2010 - 2023</span><br>Schooling from City Montessori School, Lucknow</li>
+                            <li>
+                                <span style="font-size: 16px;">2023 - 2027</span><br>
+                                <span style="color: #FFFFFF; font-size: 16px; font-weight: bold;">
+                                  Vellore Institute of Technology
+                                </span> <br>
+                                I'm a Sophomore year student, pursuing Bachelor of Technology in Computer Science at Vellore Institute of Technology. <br>
+                            </li>
+                            <li>
+                                <span style="font-size: 16px;">2021 - 2023</span><br>
+                                <span style="color: #FFFFFF; font-size: 16px; font-weight: bold;">
+                                  Schooling from City Montessori Inter College
+                                </span>
+                                <span style="color: #ff004f; margin-left: 15px; font-size: 16px;">92.0%</span> <br>
+                                Between 2021 and 2023, I was fortunate to take on numerous leadership and organizational responsibilities at City Montessori School, Lucknow, India.<br>
+                            </li>
+                            <li>
+                                <span style="font-size: 16px; ">2019 - 2021</span><br>
+                                <span style="color: #FFFFFF; font-size: 16px; font-weight: bold;">
+                                  Schooling from City Montessori Inter College
+                                </span>
+                                <span style="color: #ff004f; margin-left: 15px; font-size: 16px;">96.2%</span> <br>
+                                During the 2019-2020 academic period at City Montessori School, Lucknow, India, I engaged in a diverse range of activities that contributed significantly to my personal and academic growth.<br>
+                              </li>
+                              
+                              
+                              
                         </ul>
                     </div>
 
@@ -90,6 +116,14 @@
         <div class="container">
             <h1 class="sub-title">What I do</h1>
             <div class="services-list">
+
+                <div>
+                    <i class="fa-solid fa-code"></i>
+                    <h2>Software Developement</h2>
+                    <p>As an aspiring software developer, I am dedicated to learning various programming languages and technologies to create efficient and user-friendly software solutions for diverse applications.</p>
+                    <a href="https://github.com/idevanshrai" target="_blank">Learn more</a>
+                </div>
+
                 <div>
                     <i class="fa-brands fa-android"></i>
                     <h2>Robotics</h2>
@@ -104,12 +138,7 @@
                     <a href="https://www.instagram.com/_the_lost_album_/" target="_blank">Learn more</a>
                 </div>
 
-                <div>
-                    <i class="fa-solid fa-code"></i>
-                    <h2>Software Developer</h2>
-                    <p>As an aspiring software developer, I am dedicated to learning various programming languages and technologies to create efficient and user-friendly software solutions for diverse applications.</p>
-                    <a href="https://github.com/idevanshrai" target="_blank">Learn more</a>
-                </div>
+                
 
             </div>
         </div>
@@ -125,18 +154,18 @@
                 <div class="work">
                     <img src="imgA.png">
                     <div class="layer">
-                        <h3>Maze Solving Robot</h3>
-                        <p>An Arduino-powered robot employs ultrasonic sensors to traverse a maze, utilizing these sensors to navigate its path and successfully locate the exit.</p>
-                        <a href="https://github.com/idevanshrai/Maze-Solver"><i class="fa-solid fa-up-right-from-square"></i></a>
+                        <h3>TrojaNix</h3>
+                        <p>TrojaNix is a powerful malware detection system that offers features like quick scan, deep scan, and log monitoring.TrojaNix provides a robust solution for detecting and analyzing potential threats.</p>
+                        <a href="https://github.com/idevanshrai/TrojaNix"><i class="fa-solid fa-up-right-from-square"></i></a>
                     </div>
                 </div>
 
                 <div class="work">
                     <img src="imgB.png">
                     <div class="layer">
-                        <h3>Line Following Robot</h3>
-                        <p>The line-following robot is a nimble autonomous robot that uses sensors to track and follow lines, showcasing precise navigation and intelligent control.</p>
-                        <a href="https://github.com/idevanshrai/Line_Follower"><i class="fa-solid fa-up-right-from-square"></i></a>
+                        <h3>XOXO Duel</h3>
+                        <p>The game features a clean and intuitive interface, allowing players to enjoy the classic game on their mobile devices. It includes features like tracking player scores and displaying game results.</p>
+                        <a href="https://github.com/idevanshrai/tic_tac_toe"><i class="fa-solid fa-up-right-from-square"></i></a>
                     </div>
                 </div>
 
@@ -149,6 +178,14 @@
                     </div>
                 </div>
 
+                <div class="work">
+                    <img src="imgD.png">
+                    <div class="layer">
+                        <h3>GestureTune</h3>
+                        <p>This project allows users to control the volume of their audio devices using simple hand gestures. By leveraging computer vision techniques.</p>
+                        <a href="https://github.com/idevanshrai/Gesture-Volume-Control"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -194,20 +231,6 @@
     </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
     <script>
 
         var tablinks = document.getElementsByClassName("tab-links");
@@ -233,13 +256,10 @@
         function closemenu(){
             sidemenu.style.right = "-200px";
         }
-
-
-
     </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
         const sections = document.querySelectorAll('.scroll-animation');
 
         const observer = new IntersectionObserver(entries => {
@@ -256,11 +276,11 @@
             observer.observe(section);
         });
     });
-</script>
+    </script>
 
-<script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzAOcBA4M9ZNiW709so-2tWpugf-O2V32TbN6je8VNrsMc7RO4ba7giwuEZe2gVPDr5/exec'
-  const form = document.forms['submit-to-google-sheet']
+   <script>
+   const scriptURL = 'https://script.google.com/macros/s/AKfycbzAOcBA4M9ZNiW709so-2tWpugf-O2V32TbN6je8VNrsMc7RO4ba7giwuEZe2gVPDr5/exec'
+   const form = document.forms['submit-to-google-sheet']
 
   form.addEventListener('submit', e => {
     e.preventDefault()
@@ -268,8 +288,46 @@
       .then(response => console.log('Success!', response))
       .catch(error => console.error('Error!', error.message))
   })
-</script>        
+  </script>        
 
 
+<!--------Typing Animation------>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const typingElement = document.querySelector(".typing-effect");
+        const texts = ["A Software Developer.", "A CS Student.", "A Human."];
+        let index = 0;
+        let charIndex = 0;
+        let currentText = "";
+        let isDeleting = false;
+        const typingSpeed = 30; // Faster typing speed
+        const deletingSpeed = 30; // Faster deleting speed
+        const delay = 1200; // Delay between text changes
+
+        function type() {
+            currentText = texts[index];
+            if (isDeleting) {
+                charIndex--;
+            } else {
+                charIndex++;
+            }
+
+            typingElement.textContent = currentText.slice(0, charIndex);
+
+            if (!isDeleting && charIndex === currentText.length) {
+                // Pause at the end of the current text
+                setTimeout(() => (isDeleting = true), delay);
+            } else if (isDeleting && charIndex === 0) {
+                // Move to the next text
+                isDeleting = false;
+                index = (index + 1) % texts.length;
+            }
+
+            setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
+        }
+
+        type();
+     });
+    </script>
 </body>
 </html>
