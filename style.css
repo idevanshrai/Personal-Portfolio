@@ -98,7 +98,7 @@ nav ul li a:hover::after{
     white-space: nowrap;
     overflow: hidden;
     display: inline-block;
-    animation: caret 0.75s step-end infinite;
+
   }
   
   @keyframes caret {
@@ -106,24 +106,6 @@ nav ul li a:hover::after{
       border-color: transparent;
     }
   }
-
-
-
-
-  .typing-effect::after {
-    content: '';
-    display: inline-block;
-    width: 2px; /* Width of the cursor */
-    height: 1em; /* Height to match the text */
-    background-color: #ff004f; /* Cursor color */
-    animation: blink 1s step-end infinite; /* Blinking effect */
-}
-
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
-}
 
 
 
@@ -183,7 +165,7 @@ nav ul li a:hover::after{
 }
 
 .tab-links.active-link::after{
-    width: 50%;
+    width: 75%;
 }
 
 .tab-contents ul li{
@@ -418,12 +400,14 @@ form .btn2{
     border-radius: 6px;
     text-decoration: none;
     color: #fff;
+    background: #ff004f; /*permanent background color */
     transition: background 0.5s;
 }
 
 .btn2:hover{
-    background: #ff004f;
+    background: #e60045; /* Slightly darker shade for hover effect */
 }
+
 
 .copyright{
     width: 100%;
@@ -433,6 +417,23 @@ form .btn2{
     font-weight: 300;
     margin-top: 20px;
 }
+
+/* Targeting the textarea in the contact form */
+.contact-right textarea[name="Message"] {
+    width: 100%; /* Full width of the container */
+    height: 150px; /* Desired height */
+    max-width: 100%; /* Prevent overflow */
+    min-width: 100%; /* Ensure it occupies full width */
+    padding: 15px; /* Padding inside the textarea */
+    border: 1px solid #262626; /* Border color */
+    border-radius: 6px; /* Rounded corners */
+    background-color: #262626; /* Background color */
+    color: #ffffff; /* Text color */
+    font-size: 16px; /* Font size */
+    box-sizing: border-box; /* Include padding and border in width/height */
+    resize: none; /* No resizing allowed */
+}
+
 
 /*-----CCS for small screen----------------*/
 nav .fas{
