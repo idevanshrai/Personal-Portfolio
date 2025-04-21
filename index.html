@@ -3,16 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevanshRai</title>
+    <title>DevanshRai | Tech Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/22a88b6823.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
 </head>
-<body> 
+<body>
+    <!-- Enhanced Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div class="matrix-terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="terminal-btn red"></span>
+                        <span class="terminal-btn yellow"></span>
+                        <span class="terminal-btn green"></span>
+                    </div>
+                    <span class="terminal-title">system_boot.exe</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">> Initializing portfolio...</div>
+                    <div class="terminal-line">> Loading core modules...</div>
+                    <div class="terminal-line">> Starting developer environment...</div>
+                    <div class="terminal-line">> Compiling portfolio components...</div>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                        <div class="progress-text">0%</div>
+                    </div>
+                    <div class="binary-rain"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Three.js Background Container -->
+    <div id="threejs-bg"></div>
+
+    <!-- Header Section -->
     <div id="header">
         <div class="container">
             <nav>
-                <img src="Logo.png" class="logo">
+                <img src="/assets/Logo.png" class="logo">
                 <ul id="sidemenu">
                     <li><a href="#header">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -26,159 +62,134 @@
             </nav>
             <div class="header-text">
                 <h1>Hi, I'm <span>Devansh</span><br>
-                    <span class="typing-effect" style="color: #FFFFFF;"></span></h1>                  
+                    <span class="typing-effect"></span></h1>                  
                 <p>I'm a Software Developer and an open-source enthusiast, <br> currently pursuing Computer Science at VIT</p>
                 <div class="social-icons">
-                        <a href="https://www.linkedin.com/in/devansh-rai-210149214/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://github.com/idevanshrai" target="_blank"><i class="fa-brands fa-github"></i></a>
-                    </div>
+                    <a href="https://www.linkedin.com/in/devansh-rai-210149214/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/idevanshrai" target="_blank"><i class="fa-brands fa-github"></i></a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!----------------------------about------------------->
-
-
+    <!-- About Section -->
     <div id="about" class="scroll-animation">
         <div class="container">
             <div class="row">
                 <div class="about-col-1">
-                    <img src="Photo1.png">
+                    <img src="/assets/Photo1.png">
                 </div>
                 <div class="about-col-2">
                     <h1 class="sub-title">About Me</h1>
                     <p>A proficient Computer Science undergraduate with a solid six-year background in Java programming. Skilled in video editing, robotics, and designing digital posters and banners. Demonstrates strong leadership abilities, currently excelling as the Social Media Manager at CodeDay Lucknow, showcasing expertise in online platform management. Exhibits a profound passion for technology and actively seeks new challenges for continuous personal and professional growth.</p>
 
                     <div class="tab-titles">
-                        <p class="tab-links active-link" onclick="opentab('skills')" style="color:#FFFFFF ">Skills</p>
-                        <p class="tab-links" onclick="opentab('education')" style="color: #FFFFFF;">Educational Experience</p>
-                        <p class="tab-links" onclick="opentab('experience')" style="color:#FFFFFF ">Professional Experience</p>
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('education')">Educational Experience</p>
+                        <p class="tab-links" onclick="opentab('experience')">Professional Experience</p>
                     </div>
                     <div class="tab-contents active-tab" id="skills">
                         <ul>
-                            <li><span style="font-size: 16px;">Software Development</span><br>Java, Python, C++, App Development and Web Development</li>
-                            <li><span style="font-size: 16px;">UI/UX</span><br>Designing Web interfaces</li>
-                            <li><span style="font-size: 16px;">Visual Media Production</span><br>Photography and Video Editing</li>
-                            <li><span style="font-size: 16px;">Robotics</span><br>Designing and making robots</li>
+                            <li><span>Software Development</span><br>Java, Python, C++, App Development and Web Development</li>
+                            <li><span>UI/UX</span><br>Designing Web interfaces</li>
+                            <li><span>Visual Media Production</span><br>Photography and Video Editing</li>
+                            <li><span>Robotics</span><br>Designing and making robots</li>
                         </ul>
                     </div>
 
                     <div class="tab-contents" id="experience">
                         <ul>
-                            <li><span style="font-size: 16px;">2024 - Present</span><br>Google Developer Group- Student Developer</li>
-                            <li><span style="font-size: 16px;">2024 - Present</span><br>CodeDay Lucknow- Social Media Manager & Volunteer</li>
-                            <li><span style="font-size: 16px;">2024 - Present</span><br>IoT Club | VIT | Core Member</li>
-                            <li><span style="font-size: 16px;">2024 - Present</span><br>Eureka Club | VIT | Core Member</li>
+                            <li><span>2024 - Present</span><br>Google Developer Group- Student Developer</li>
+                            <li><span>2024 - Present</span><br>CodeDay Lucknow- Social Media Manager & Volunteer</li>
+                            <li><span>2024 - Present</span><br>IoT Club | VIT | Core Member</li>
+                            <li><span>2024 - Present</span><br>Eureka Club | VIT | Core Member</li>
                         </ul>
                     </div>
 
                     <div class="tab-contents" id="education">
                         <ul>
                             <li>
-                                <span style="font-size: 16px;">2023 - 2027</span><br>
-                                <span style="color: #FFFFFF; font-size: 16px; font-weight: bold;">
-                                  Vellore Institute of Technology
-                                </span> <br>
-                                I'm a Sophomore year student, pursuing Bachelor of Technology in Computer Science at Vellore Institute of Technology. <br>
+                                <span>2023 - 2027</span><br>
+                                <strong>Vellore Institute of Technology</strong><br>
+                                I'm a Sophomore year student, pursuing Bachelor of Technology in Computer Science at Vellore Institute of Technology.
                             </li>
                             <li>
-                                <span style="font-size: 16px;">2021 - 2023</span><br>
-                                <span style="color: #FFFFFF; font-size: 16px; font-weight: bold;">
-                                  Schooling from City Montessori Inter College
-                                </span>
-                                <span style="color: #ff004f; margin-left: 15px; font-size: 16px;">92.0%</span> <br>
-                                Between 2021 and 2023, I was fortunate to take on numerous leadership and organizational responsibilities at City Montessori School, Lucknow, India.<br>
+                                <span>2021 - 2023</span><br>
+                                <strong>Schooling from City Montessori Inter College</strong>
+                                <span class="percentage">92.0%</span><br>
+                                Between 2021 and 2023, I was fortunate to take on numerous leadership and organizational responsibilities at City Montessori School, Lucknow, India.
                             </li>
                             <li>
-                                <span style="font-size: 16px; ">2019 - 2021</span><br>
-                                <span style="color: #FFFFFF; font-size: 16px; font-weight: bold;">
-                                  Schooling from City Montessori Inter College
-                                </span>
-                                <span style="color: #ff004f; margin-left: 15px; font-size: 16px;">94%</span> <br>
-                                During the 2019-2020 academic period at City Montessori School, Lucknow, India, I engaged in a diverse range of activities that contributed significantly to my personal and academic growth.<br>
-                              </li>
-                              
-                              
-                              
+                                <span>2019 - 2021</span><br>
+                                <strong>Schooling from City Montessori Inter College</strong>
+                                <span class="percentage">94%</span><br>
+                                During the 2019-2020 academic period at City Montessori School, Lucknow, India, I engaged in a diverse range of activities that contributed significantly to my personal and academic growth.
+                            </li>
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 
-
-
-    <!----------Portfolio----------------------------->
+    <!-- Services Section -->
     <div id="services" class="scroll-animation">
         <div class="container">
             <h1 class="sub-title">What I do</h1>
             <div class="services-list">
-
                 <div>
                     <i class="fa-solid fa-code"></i>
                     <h2>Software Developement</h2>
                     <p>As an aspiring software developer, I am dedicated to learning various programming languages and technologies to create efficient and user-friendly software solutions for diverse applications.</p>
                     <a href="https://github.com/idevanshrai" target="_blank">Learn more</a>
                 </div>
-
                 <div>
                     <i class="fa-brands fa-android"></i>
                     <h2>Robotics</h2>
                     <p>Built autonomus robots based on Arduino and Raspberry, using Python and C++.</p>
                     <a href="https://github.com/idevanshrai">Learn more</a>
                 </div>
-
                 <div>
                     <i class="fa-solid fa-camera-retro"></i>
                     <h2>Photography</h2>
                     <p>Passionate photographer with a keen eye for detail. Experienced in various styles and techniques, adept at using professional equipment and software.</p>
                     <a href="https://www.instagram.com/_the_lost_album_/" target="_blank">Learn more</a>
                 </div>
-
-                
-
             </div>
         </div>
     </div>
 
-
-    <!-----------------------My Portfolio--------------------------------->
-
+    <!-- Portfolio Section -->
     <div id="portfolio" class="scroll-animation">
         <div class="container">
             <h1 class="sub-title">My Portfolio</h1>
             <div class="work-list">
                 <div class="work">
-                    <img src="imgA.png">
+                    <img src="/assets/imgA.png">
                     <div class="layer">
                         <h3>Moodify</h3>
                         <p>Moodify is a web-based app that assesses user mood through a questionnaire and provides personalized Spotify playlists based on mood and language preferences.</p>
                         <a href="https://github.com/idevanshrai/Moodify"><i class="fa-solid fa-up-right-from-square"></i></a>
                     </div>
                 </div>
-
                 <div class="work">
-                    <img src="imgB.png">
+                    <img src="/assets/imgB.png">
                     <div class="layer">
                         <h3>XOXO Duel</h3>
                         <p>The game features a clean and intuitive interface, allowing players to enjoy the classic game on their mobile devices. It includes features like tracking player scores and displaying game results.</p>
                         <a href="https://github.com/idevanshrai/tic_tac_toe"><i class="fa-solid fa-up-right-from-square"></i></a>
                     </div>
                 </div>
-
                 <div class="work">
-                    <img src="imgC.png">
+                    <img src="/assets/imgC.png">
                     <div class="layer">
                         <h3>TROONMEGA</h3>
                         <p>The autonomous car utilizes cameras and OpenCV to perceive its surroundings, enabling real-time image processing for navigation and obstacle avoidance.</p>
                         <a href="https://github.com/idevanshrai/TRONOOMEGA"><i class="fa-solid fa-up-right-from-square"></i></a>
                     </div>
                 </div>
-
                 <div class="work">
-                    <img src="imgD.png">
+                    <img src="/assets/imgD.png">
                     <div class="layer">
                         <h3>GestureTune</h3>
                         <p>This project allows users to control the volume of their audio devices using simple hand gestures. By leveraging computer vision techniques.</p>
@@ -189,30 +200,26 @@
         </div>
     </div>
 
-
-    <!--------------------Download Resume-------------------------------->
-
+    <!-- Resume Section -->
     <div id="resume" class="scroll-animation">
         <div class="RESUME">
             <h1 class="sub-title">My Resume</h1>
-            <a href="RESUME.pdf" download class="btn" >Download</a>
+            <a href="/assets/RESUME.pdf" download class="btn" >Download</a>
         </div>
     </div>
 
-    <!---------------------Contact--------------------------------------->
-
+    <!-- Contact Section -->
     <div id="contact" class="scroll-animation">
         <div class="container">
             <div class="row">
                 <div class="contact-left">
                     <h1 class="sub-title">Contact Me</h1>  
-                    <p> <i class="fa-solid fa-paper-plane"></i>     idevanshrai@gmail.com</p>
+                    <p><i class="fa-solid fa-paper-plane"></i> idevanshrai@gmail.com</p>
                     <div class="social-icons">
                         <a href="https://www.linkedin.com/in/devansh-rai-210149214/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
                         <a href="https://github.com/idevanshrai" target="_blank"><i class="fa-brands fa-github"></i></a>
                     </div>
-
-            </div>        
+                </div>        
                 <div class="contact-right"> 
                     <form name="submit-to-google-sheet">
                         <input type="text" name="Name" placeholder="Your name" required>
@@ -221,112 +228,14 @@
                         <button type="submit" class="btn2">Submit</button>
                     </form>
                 </div>
-            
+            </div>
         </div>
         <div class="copyright">
-            <p>Copyright © 2024 Devansh - All Rights Reserved. </p>
+            <p>Copyright © 2024 Devansh - All Rights Reserved.</p>
         </div>
     </div>
 
-
-    <script>
-
-        var tablinks = document.getElementsByClassName("tab-links");
-        var tabcontents = document.getElementsByClassName("tab-contents");
-        function opentab(tabname){
-            for(tablink of tablinks){
-                tablink.classList.remove("active-link");
-            }
-            for(tabcontent of tabcontents){
-                tabcontent.classList.remove("active-tab");
-            }
-            event.currentTarget.classList.add("active-link");
-            document.getElementById(tabname).classList.add("active-tab");
-        }
-
-    </script>
-
-    <script>
-        var sidemenu = document.getElementById("sidemenu");
-        function openmenu(){
-            sidemenu.style.right = "0";
-        }
-        function closemenu(){
-            sidemenu.style.right = "-200px";
-        }
-    </script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const sections = document.querySelectorAll('.scroll-animation');
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                } else {
-                    entry.target.classList.remove('animate');
-                }
-            });
-        }, { threshold: 0.5 });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    });
-    </script>
-
-   <script>
-   const scriptURL = 'https://script.google.com/macros/s/AKfycbzAOcBA4M9ZNiW709so-2tWpugf-O2V32TbN6je8VNrsMc7RO4ba7giwuEZe2gVPDr5/exec'
-   const form = document.forms['submit-to-google-sheet']
-
-  form.addEventListener('submit', e => {
-    e.preventDefault()
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => console.log('Success!', response))
-      .catch(error => console.error('Error!', error.message))
-  })
-  </script>        
-
-
-<!--------Typing Animation------>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const typingElement = document.querySelector(".typing-effect");
-        const texts = ["A Software Developer.", "A CS Student.", "A Human."];
-        let index = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingSpeed = 60; // Typing speed
-        const deletingSpeed = 65;// Deleting speed
-        const delayBetweenTexts = 600; // Delay between text changes
-        const delayBeforeDeleting = 1000; // Pause before starting to delete
-
-        function type() {
-            const currentText = texts[index];
-            typingElement.textContent = currentText.slice(0, charIndex);
-
-            if (!isDeleting && charIndex < currentText.length) {
-                charIndex++;
-                setTimeout(type, typingSpeed);
-            } else if (isDeleting && charIndex > 0) {
-                charIndex--;
-                setTimeout(type, deletingSpeed);
-            } else if (!isDeleting && charIndex === currentText.length) {
-                setTimeout(() => {
-                    isDeleting = true;
-                    type();
-                }, delayBeforeDeleting);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                index = (index + 1) % texts.length;
-                setTimeout(type, delayBetweenTexts);
-            }
-        }
-
-        type();
-    });
-</script>
-
+    <script src="script.js"></script>
+    <script src="three.js"></script>
 </body>
 </html>
