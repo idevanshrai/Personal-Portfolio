@@ -752,9 +752,10 @@ form .btn2 {
         font-size: 40px;
     }
     
-    nav .fas {
+    .fa-bars {
         display: block;
         font-size: 25px;
+        cursor: pointer;
     }
     
     nav ul {
@@ -769,12 +770,16 @@ form .btn2 {
         transition: right 0.5s;
     }
     
+    nav ul.show-menu {
+        right: 0;
+    }
+    
     nav ul li {
         display: block;
         margin: 25px;
     }
     
-    nav ul .fas {
+    nav ul .fa-times {
         position: absolute;
         top: 25px;
         left: 25px;

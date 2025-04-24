@@ -4,6 +4,12 @@ function initThreeJSBackground() {
     const container = document.getElementById('threejs-bg');
     if (!container) return;
 
+    // Check if Three.js is loaded
+    if (typeof THREE === 'undefined') {
+        console.error('Three.js not loaded');
+        return;
+    }
+
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -117,8 +123,3 @@ function initThreeJSBackground() {
     // Start animation
     animate();
 }
-
-// Start Three.js after splash screen
-document.addEventListener('DOMContentLoaded', function() {
-    // The splash screen will call initThreeJSBackground when it finishes
-});

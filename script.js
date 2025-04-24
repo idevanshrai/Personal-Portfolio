@@ -25,10 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 splashScreen.style.opacity = '0';
                 setTimeout(() => {
                     splashScreen.style.display = 'none';
+                    // Initialize Three.js after splash screen disappears
+                    initThreeJSBackground();
                 }, 1000);
             }, 500);
         }
         progressBar.style.width = `${progress}%`;
+        document.querySelector('.progress-text').textContent = `${Math.round(progress)}%`;
     }, 100);
     
     // Initialize custom cursor
@@ -93,27 +96,34 @@ document.addEventListener('DOMContentLoaded', function() {
     
     scrollElements.forEach(el => observer.observe(el));
     
-    // Tab functionality
-    var tablinks = document.getElementsByClassName("tab-links");
-    var tabcontents = document.getElementsByClassName("tab-contents");
-    function opentab(tabname){
-        for(tablink of tablinks){
-            tablink.classList.remove("active-link");
+    // Tab functionality - Fixed version
+    function opentab(event, tabname) {
+        // Get all elements with class="tab-links" and remove "active-link" class
+        const tablinks = document.getElementsByClassName("tab-links");
+        for (let i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active-link");
         }
-        for(tabcontent of tabcontents){
-            tabcontent.classList.remove("active-tab");
+        
+        // Get all elements with class="tab-contents" and remove "active-tab" class
+        const tabcontents = document.getElementsByClassName("tab-contents");
+        for (let i = 0; i < tabcontents.length; i++) {
+            tabcontents[i].classList.remove("active-tab");
         }
+        
+        // Add "active-link" class to the clicked tab
         event.currentTarget.classList.add("active-link");
+        
+        // Add "active-tab" class to the corresponding tab content
         document.getElementById(tabname).classList.add("active-tab");
     }
 
-    // Mobile menu functionality
-    var sidemenu = document.getElementById("sidemenu");
-    function openmenu(){
-        sidemenu.style.right = "0";
+    // Mobile menu functionality - Updated version
+    const sidemenu = document.getElementById("sidemenu");
+    function openmenu() {
+        sidemenu.classList.add("show-menu");
     }
-    function closemenu(){
-        sidemenu.style.right = "-200px";
+    function closemenu() {
+        sidemenu.classList.remove("show-menu");
     }
 
     // Typing effect
