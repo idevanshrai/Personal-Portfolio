@@ -842,3 +842,125 @@ form .btn2 {
         width: 95%;
     }
 }
+
+/* ===== GITHUB FEED SECTION ===== */
+#github-feed {
+    padding: 80px 0;
+    position: relative;
+}
+
+.github-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.github-stats {
+    background: #262626;
+    padding: 30px;
+    border-radius: 10px;
+    border-left: 3px solid #ff004f;
+}
+
+.github-activity {
+    background: #262626;
+    padding: 30px;
+    border-radius: 10px;
+    border-left: 3px solid #ff004f;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 0, 79, 0.2);
+}
+
+.stat-card i {
+    font-size: 30px;
+    color: #ff004f;
+    margin-bottom: 10px;
+}
+
+.stat-card span {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    font-size: 14px;
+    color: #ababab;
+}
+
+.activity-feed {
+    margin-top: 20px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #333;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    background: #1e1e1e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.activity-icon i {
+    color: #ff004f;
+}
+
+.activity-details {
+    flex-grow: 1;
+}
+
+.activity-type {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.activity-repo {
+    color: #ff004f;
+    font-weight: 500;
+}
+
+.activity-date {
+    font-size: 12px;
+    color: #ababab;
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+    .github-container {
+        grid-template-columns: 1fr;
+    }
+}
