@@ -102,6 +102,23 @@ document.addEventListener('DOMContentLoaded', function () {
         // Call the function
         fetchGitHubData();
 
+        // Handle mobile menu toggle
+        // Function to open the menu
+        function openmenu() {
+        document.getElementById("sidemenu").classList.add("open");
+        document.getElementById("menu-close").style.display = "block"; // Show the cross button when menu is open
+        document.getElementById("menu-bars").style.display = "none"; // Hide the menu bar button
+        }
+
+        // Function to close the menu
+        function closemenu() {
+        document.getElementById("sidemenu").classList.remove("open");
+        document.getElementById("menu-close").style.display = "none"; // Hide the cross button
+        document.getElementById("menu-bars").style.display = "block"; // Show the menu bar button again
+        }
+
+
+
     // Animate terminal lines
     terminalLines.forEach((line, index) => {
         setTimeout(() => {
@@ -290,4 +307,18 @@ tabButtons.forEach(button => {
         }
     });
 });
+
+// Mobile menu functionality
+function openmenu() {
+    document.getElementById("sidemenu").style.right = "0";
+    document.getElementById("menu-close").style.display = "block";
+    document.getElementById("menu-bars").style.display = "none";
+}
+
+function closemenu() {
+    document.getElementById("sidemenu").style.right = "-200px";
+    document.getElementById("menu-close").style.display = "none";
+    document.getElementById("menu-bars").style.display = "block";
+}
+
 });

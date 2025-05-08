@@ -752,10 +752,21 @@ form .btn2 {
         font-size: 40px;
     }
     
-    .fa-bars {
+    #menu-bars {
         display: block;
         font-size: 25px;
         cursor: pointer;
+        z-index: 100;
+    }
+    
+    #menu-close {
+        display: none;
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        font-size: 25px;
+        cursor: pointer;
+        z-index: 101;
     }
     
     nav ul {
@@ -766,7 +777,7 @@ form .btn2 {
         width: 200px;
         height: 100vh;
         padding-top: 50px;
-        z-index: 2;
+        z-index: 100;
         transition: right 0.5s;
     }
     
@@ -777,13 +788,6 @@ form .btn2 {
     nav ul li {
         display: block;
         margin: 25px;
-    }
-    
-    nav ul .fa-times {
-        position: absolute;
-        top: 25px;
-        left: 25px;
-        cursor: pointer;
     }
     
     .sub-title {
@@ -819,27 +823,24 @@ form .btn2 {
     .work-list {
         grid-template-columns: 1fr;
     }
+    
+    .github-container {
+        grid-template-columns: 1fr;
+    }
 }
 
-@media only screen and (max-width: 480px) {
-    .header-text {
-        margin-top: 50%;
+@media only screen and (min-width: 769px) {
+    #menu-bars, #menu-close {
+        display: none !important;
     }
     
-    .header-text h1 {
-        font-size: 32px;
-    }
-    
-    .typing-effect {
-        font-size: 24px;
-    }
-    
-    .sub-title {
-        font-size: 32px;
-    }
-    
-    .terminal {
-        width: 95%;
+    nav ul {
+        display: flex !important;
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        padding-top: 0 !important;
     }
 }
 
