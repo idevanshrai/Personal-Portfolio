@@ -12,13 +12,19 @@ html {
 }
 
 body {
-    background-color: #080808;
+    background: #000;
     color: #fff;
     overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    z-index: 2;
 }
 
 .container {
+    position: relative;
+    z-index: 2;
     padding: 10px 10%;
+    width: 100%;
 }
 
 /* ===== ENHANCED SPLASH SCREEN ===== */
@@ -196,66 +202,41 @@ body {
 
 /* ===== HEADER ===== */
 #header {
-    width: 100%;
-    height: 100vh;
-    background-image: url(/assets/image1.png);
-    background-size: cover;
-    background-position: center;
     position: relative;
+    z-index: 1;
+    height: 100vh;
+    width: 100%;
+    background: transparent;
 }
 
-nav {
+.header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 20px 0;
+    height: calc(100vh - 80px);
+    padding: 0 10%;
+    margin-top: 120px;
     position: relative;
     z-index: 2;
-}
-
-.logo {
-    width: 100px;
-}
-
-nav ul li {
-    display: inline-block;
-    list-style: none;
-    margin: 10px 20px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-    position: relative;
-}
-
-nav ul li a::after {
-    content: '';
-    width: 0%;
-    height: 3px;
-    background: #ff004f;
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    transition: 0.5s;
-}
-
-nav ul li a:hover::after {
-    width: 100%;
 }
 
 .header-text {
-    margin-top: 20%;
-    font-size: 30px;
     position: relative;
     z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
 }
 
 .header-text h1 {
     font-size: 60px;
-    margin-top: 20px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 0, 79, 0.3);
+}
+
+.header-text h2 {
+    font-size: 40px;
+    color: #ff004f;
+    margin-bottom: 20px;
+    text-shadow: 0 0 8px rgba(255, 0, 79, 0.3);
 }
 
 .header-text h1 span {
@@ -263,9 +244,28 @@ nav ul li a:hover::after {
 }
 
 .header-text p {
-    margin-top: 30px;
     font-size: 20px;
     font-weight: lighter;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.header-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+}
+
+.header-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ff004f;
+    box-shadow: 0 0 20px rgba(255, 0, 79, 0.3);
 }
 
 /* Typing Effect */
@@ -303,6 +303,10 @@ nav ul li a:hover::after {
     padding: 80px 0;
     color: #ababab;
     position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 0, 79, 0.1);
+    border-bottom: 1px solid rgba(255, 0, 79, 0.1);
 }
 
 .row {
@@ -320,6 +324,8 @@ nav ul li a:hover::after {
     border-radius: 15px;
     transition: transform 0.5s;
     box-shadow: 0 0 20px rgba(255, 0, 79, 0.2);
+    position: relative;
+    z-index: 1;
 }
 
 .about-col-1 img:hover {
@@ -334,7 +340,21 @@ nav ul li a:hover::after {
     font-size: 50px;
     font-weight: 600;
     color: #fff;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(255, 0, 79, 0.4);
+    position: relative;
+    display: inline-block;
+}
+
+.sub-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 60px;
+    height: 3px;
+    background: #ff004f;
+    box-shadow: 0 0 10px rgba(255, 0, 79, 0.5);
 }
 
 .tab-titles {
@@ -413,6 +433,10 @@ nav ul li a:hover::after {
 #services {
     padding: 30px 0;
     position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 0, 79, 0.1);
+    border-bottom: 1px solid rgba(255, 0, 79, 0.1);
 }
 
 .services-list {
@@ -423,13 +447,17 @@ nav ul li a:hover::after {
 }
 
 .services-list div {
-    background: #262626;
+    position: relative;
+    z-index: 2;
+    background: rgba(10, 10, 10, 0.7);
     padding: 40px;
     font-size: 13px;
     font-weight: 300;
     border-radius: 10px;
-    transition: all 0.5s ease;
+    transition: all 0.4s ease;
     border-left: 3px solid #ff004f;
+    border: 1px solid rgba(255, 0, 79, 0.15);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
 }
 
 .services-list div i {
@@ -469,15 +497,19 @@ nav ul li a:hover::after {
 }
 
 .services-list div:hover {
-    background: #1e1e1e;
     transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(255, 0, 79, 0.1);
+    box-shadow: 0 8px 30px rgba(255, 0, 79, 0.2);
+    background: rgba(20, 20, 20, 0.8);
 }
 
 /* ===== PORTFOLIO SECTION ===== */
 #portfolio {
     padding: 50px 0;
     position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 0, 79, 0.1);
+    border-bottom: 1px solid rgba(255, 0, 79, 0.1);
 }
 
 .work-list {
@@ -488,11 +520,15 @@ nav ul li a:hover::after {
 }
 
 .work {
-    border-radius: 10px;
     position: relative;
+    z-index: 2;
+    border-radius: 10px;
     overflow: hidden;
     border: 1px solid #262626;
     transition: all 0.5s ease;
+    background: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 0, 79, 0.15);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
 }
 
 .work:hover {
@@ -505,6 +541,8 @@ nav ul li a:hover::after {
     border-radius: 10px;
     display: block;
     transition: transform 0.5s;
+    position: relative;
+    z-index: 1;
 }
 
 .layer {
@@ -524,6 +562,7 @@ nav ul li a:hover::after {
     text-align: center;
     font-size: 14px;
     transition: height 0.5s;
+    z-index: 2;
 }
 
 .layer h3 {
@@ -562,49 +601,89 @@ nav ul li a:hover::after {
 
 /* ===== RESUME SECTION ===== */
 #resume {
-    padding: 50px 0;
-    text-align: center;
+    padding: 80px 0;
     position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 0, 79, 0.1);
+    border-bottom: 1px solid rgba(255, 0, 79, 0.1);
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn {
+.resume-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.resume-content h1 {
+    margin-bottom: 40px;
+    font-size: 50px;
+    font-weight: 600;
+    position: relative;
     display: inline-block;
-    margin: 50px auto;
-    border: 1px solid #ff004f;
-    padding: 14px 50px;
-    border-radius: 6px;
+}
+
+.resume-content h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 3px;
+    background: #ff004f;
+    box-shadow: 0 0 10px rgba(255, 0, 79, 0.5);
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 15px 50px;
+    font-size: 18px;
     text-decoration: none;
     color: #fff;
-    transition: all 0.5s ease;
-    font-weight: 500;
+    background: rgba(255, 0, 79, 0.1);
+    border: 2px solid #ff004f;
+    border-radius: 6px;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    margin-top: 30px;
 }
 
-.btn::before {
+.download-btn:hover {
+    background: #ff004f;
+    box-shadow: 0 0 20px rgba(255, 0, 79, 0.4);
+    transform: translateY(-2px);
+}
+
+.download-btn::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 0, 79, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: 0.5s;
 }
 
-.btn:hover::before {
+.download-btn:hover::before {
     left: 100%;
-}
-
-.btn:hover {
-    background: #ff004f;
-    box-shadow: 0 10px 20px rgba(255, 0, 79, 0.3);
 }
 
 /* ===== CONTACT SECTION ===== */
 #contact {
     padding: 50px 0;
     position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 0, 79, 0.1);
+    border-bottom: 1px solid rgba(255, 0, 79, 0.1);
 }
 
 .contact-left {
@@ -644,6 +723,7 @@ nav ul li a:hover::after {
 .social-icons a:hover {
     color: #ff004f;
     transform: translateY(-5px);
+    text-shadow: 0 0 15px rgba(255, 0, 79, 0.5);
 }
 
 .contact-right form {
@@ -718,7 +798,8 @@ form .btn2 {
 .scroll-animation {
     opacity: 0;
     transform: translateY(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
 }
 
 .scroll-animation.animate {
@@ -731,10 +812,10 @@ form .btn2 {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.1;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
 }
 
 /* ===== MEDIA QUERIES ===== */
@@ -743,20 +824,40 @@ form .btn2 {
         padding: 10px 5%;
     }
     
+    .header-container {
+        margin-top: 80px;
+        padding: 0 5%;
+    }
+    
     .header-text {
-        margin-top: 30%;
-        font-size: 20px;
+        padding: 20px;
     }
     
     .header-text h1 {
         font-size: 40px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+    
+    .header-text h2 {
+        font-size: 30px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+    
+    .header-text p {
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+    }
+    
+    .header-image {
+        max-width: 300px;
     }
     
     #menu-bars {
         display: block;
         font-size: 25px;
         cursor: pointer;
-        z-index: 100;
+        z-index: 1000;
+        color: #fff;
+        position: relative;
     }
     
     #menu-close {
@@ -766,28 +867,43 @@ form .btn2 {
         right: 25px;
         font-size: 25px;
         cursor: pointer;
-        z-index: 101;
+        z-index: 1001;
+        color: #fff;
     }
     
     nav ul {
-        background: #ff004f;
+        background: rgba(0, 0, 0, 0.95);
         position: fixed;
         top: 0;
         right: -200px;
         width: 200px;
         height: 100vh;
         padding-top: 50px;
-        z-index: 100;
-        transition: right 0.5s;
+        z-index: 999;
+        transition: right 0.5s ease;
+        display: block !important;
+        backdrop-filter: blur(10px);
     }
     
-    nav ul.show-menu {
-        right: 0;
+    nav {
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .header-text {
+        position: relative;
+        z-index: 1;
     }
     
     nav ul li {
         display: block;
         margin: 25px;
+    }
+    
+    nav ul li a {
+        color: #fff;
+        font-size: 16px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
     
     .sub-title {
@@ -827,11 +943,19 @@ form .btn2 {
     .github-container {
         grid-template-columns: 1fr;
     }
+    
+    #threejs-bg {
+        opacity: 0.5;
+    }
+
+    #about, #services, #portfolio, #resume, #contact, #github-feed {
+        background: rgba(0, 0, 0, 0.75);
+    }
 }
 
 @media only screen and (min-width: 769px) {
     #menu-bars, #menu-close {
-        display: none !important;
+        display: none;
     }
     
     nav ul {
@@ -848,6 +972,10 @@ form .btn2 {
 #github-feed {
     padding: 80px 0;
     position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 0, 79, 0.1);
+    border-bottom: 1px solid rgba(255, 0, 79, 0.1);
 }
 
 .github-container {
@@ -858,17 +986,25 @@ form .btn2 {
 }
 
 .github-stats {
-    background: #262626;
+    position: relative;
+    z-index: 2;
+    background: rgba(10, 10, 10, 0.7);
     padding: 30px;
     border-radius: 10px;
     border-left: 3px solid #ff004f;
+    border: 1px solid rgba(255, 0, 79, 0.15);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
 }
 
 .github-activity {
-    background: #262626;
+    position: relative;
+    z-index: 2;
+    background: rgba(10, 10, 10, 0.7);
     padding: 30px;
     border-radius: 10px;
     border-left: 3px solid #ff004f;
+    border: 1px solid rgba(255, 0, 79, 0.15);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
 }
 
 .stats-grid {
@@ -964,4 +1100,139 @@ form .btn2 {
     .github-container {
         grid-template-columns: 1fr;
     }
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 50px;
+    transition: all 0.3s ease;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav.scrolled {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    padding: 15px 50px;
+}
+
+.logo {
+    width: 100px;
+    transition: all 0.3s ease;
+}
+
+nav.scrolled .logo {
+    width: 90px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+    align-items: center;
+    gap: 40px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    padding: 5px 0;
+}
+
+nav.scrolled ul li a {
+    font-size: 16px;
+}
+
+nav ul li a::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Mobile menu adjustments */
+#menu-bars, #menu-close {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    nav {
+        padding: 15px 20px;
+    }
+    
+    #menu-bars {
+        display: block;
+        font-size: 25px;
+        cursor: pointer;
+        color: #fff;
+        margin-left: auto;
+    }
+    
+    #menu-close {
+        display: none;
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        font-size: 25px;
+        cursor: pointer;
+        color: #fff;
+        z-index: 1001;
+    }
+    
+    nav ul {
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        position: fixed;
+        top: 0;
+        right: -200px;
+        width: 200px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 999;
+        transition: right 0.5s ease;
+        flex-direction: column;
+        gap: 25px;
+    }
+    
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    nav ul li a {
+        display: block;
+        padding: 10px 0;
+    }
+}
+
+/* Section spacing */
+section {
+    padding: 80px 0;
+    position: relative;
 }

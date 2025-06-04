@@ -8,10 +8,11 @@
     <link rel="icon" type="image/png" href="assets/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.ico" />
     <script src="https://kit.fontawesome.com/22a88b6823.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
+    <!-- Three.js Background Container -->
+    <div id="threejs-bg"></div>
+
     <!-- Enhanced Splash Screen -->
     <div id="splash-screen">
         <div class="splash-content">
@@ -43,28 +44,25 @@
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
-    <!-- Three.js Background Container -->
-    <div id="threejs-bg"></div>
-
     <!-- Header Section -->
-    <div id="header">
-        <div class="container">
-            <nav>
-                <img src="/assets/Logo.png" class="logo">
-                <ul id="sidemenu">
-                    <li><a href="#header">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Skills</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#resume">Resume</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <i class="fas fa-times" id="menu-close" onclick="closemenu()"></i>
-                </ul>
-                <i class="fas fa-bars" id="menu-bars" onclick="openmenu()"></i>
-            </nav>
+    <header id="header">
+        <nav>
+            <img src="/assets/Logo.png" class="logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <i class="fas fa-times" id="menu-close" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" id="menu-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-container">
             <div class="header-text">
-                <h1>Hi, I'm <span>Devansh</span><br>
-                    <span class="typing-effect"></span></h1>                  
+                <h1>Hi, I'm <span>Devansh</span></h1>
+                <h2 class="typing-effect">A Software Developer.</h2>
                 <p>I'm a Software Developer and an open-source enthusiast, <br> currently pursuing Computer Science at VIT</p>
                 <div class="social-icons">
                     <a href="https://www.linkedin.com/in/devansh-rai-210149214/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
@@ -72,7 +70,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </header>
 
     <!-- About Section -->
     <div id="about" class="scroll-animation">
@@ -83,7 +81,7 @@
                 </div>
                 <div class="about-col-2">
                     <h1 class="sub-title">About Me</h1>
-                    <p>I'm a Computer Science undergrad who's worked across a bunch of tech stacks — from AI projects to web apps. I’ve dabbled in robotics, video editing, and poster design too. I previously handled social media at CodeDay Lucknow, where I got to blend creativity with community engagement. I enjoy building things that mix tech with design and solve real problems, whether it's through a clever piece of code or a clean user interface. I'm always up for learning something new, especially if it challenges me to think differently or pick up a new tool. For me, tech isn't just about building — it’s about experimenting, iterating, and having fun along the way.</p>
+                    <p>I'm a Computer Science undergrad who's worked across a bunch of tech stacks — from AI projects to web apps. I've dabbled in robotics, video editing, and poster design too. I previously handled social media at CodeDay Lucknow, where I got to blend creativity with community engagement. I enjoy building things that mix tech with design and solve real problems, whether it's through a clever piece of code or a clean user interface. I'm always up for learning something new, especially if it challenges me to think differently or pick up a new tool. For me, tech isn't just about building — it's about experimenting, iterating, and having fun along the way.</p>
 
                     <div class="tab-titles">
                         <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
@@ -142,7 +140,7 @@
                 <div>
                     <i class="fa-solid fa-code"></i>
                     <h2>Software Developement</h2>
-                    <p>AAs an aspiring software developer, I’m committed to mastering diverse programming languages and technologies to craft efficient, scalable, and user-centric software solutions that address real-world problems.</p>
+                    <p>AAs an aspiring software developer, I'm committed to mastering diverse programming languages and technologies to craft efficient, scalable, and user-centric software solutions that address real-world problems.</p>
                     <a href="https://github.com/idevanshrai" target="_blank">Learn more</a>
                 </div>
                 <div>
@@ -245,9 +243,11 @@
 
     <!-- Resume Section -->
     <div id="resume" class="scroll-animation">
-        <div class="RESUME">
-            <h1 class="sub-title">My Resume</h1>
-            <a href="/assets/RESUME.pdf" download class="btn" >Download</a>
+        <div class="resume-content">
+            <h1>My Resume</h1>
+            <a href="/assets/RESUME.pdf" download class="download-btn">
+                <i class="fas fa-download"></i> Download CV
+            </a>
         </div>
     </div>
 
@@ -278,7 +278,9 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="three.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

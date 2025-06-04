@@ -1,118 +1,163 @@
-// Interstellar-Themed Three.js Background
-function initThreeJSBackground() {
-    // Only initialize if container exists
-    const container = document.getElementById('threejs-bg');
-    if (!container) return;
+// Global variables
+let scene, camera, renderer, stars;
 
-    // Check if Three.js is loaded
-    if (typeof THREE === 'undefined') {
-        console.error('Three.js not loaded');
-        return;
-    }
+// Initialize everything
+function init() {
+    // Create scene
+    scene = new THREE.Scene();
 
-    // Scene setup
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000010); // Deep space vibe
+    // Create camera with adjusted position
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+    camera.position.z = 500;
 
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({
+    // Create renderer with enhanced settings
+    renderer = new THREE.WebGLRenderer({
+        antialias: true,
         alpha: true,
-        antialias: true
+        powerPreference: "high-performance"
     });
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    // Add renderer to page
+    document.getElementById('threejs-bg').appendChild(renderer.domElement);
 
-    // Create glowing star-like floating elements
-    const elements = [];
-    const elementCount = 40;
-    const geometry = new THREE.SphereGeometry(0.15, 16, 16); // Small glowing spheres
+    // Create stars
+    createStars();
 
-    const colors = [
-        0xaaaaee,
-        0xeeeeff,
-        0x8899ff,
-        0x555577,
-        0x9999aa
-    ];
+    // Add window resize handler
+    window.addEventListener('resize', onWindowResize, false);
 
-    for (let i = 0; i < elementCount; i++) {
-        const material = new THREE.MeshStandardMaterial({
-            color: colors[Math.floor(Math.random() * colors.length)],
-            emissive: 0x222244,
-            metalness: 0.8,
-            roughness: 0.2,
-            transparent: true,
-            opacity: 0.8
-        });
-
-        const element = new THREE.Mesh(geometry, material);
-
-        element.position.x = (Math.random() - 0.5) * 40;
-        element.position.y = (Math.random() - 0.5) * 40;
-        element.position.z = (Math.random() - 0.5) * 40;
-
-        element.rotation.x = Math.random() * Math.PI;
-        element.rotation.y = Math.random() * Math.PI;
-
-        const scale = 0.8 + Math.random() * 1.5;
-        element.scale.set(scale, scale, scale);
-
-        element.userData = {
-            originalX: element.position.x,
-            originalY: element.position.y,
-            originalZ: element.position.z,
-            speed: 0.2 + Math.random() * 0.3,
-            rotationSpeed: 0.005 + Math.random() * 0.01
-        };
-
-        scene.add(element);
-        elements.push(element);
-    }
-
-    // Ambient, spacey light
-    const ambientLight = new THREE.AmbientLight(0x8888ff, 1.5); // Soft bluish glow
-    scene.add(ambientLight);
-
-    // Distant point light like a star
-    const pointLight = new THREE.PointLight(0xffffff, 2, 100);
-    pointLight.position.set(0, 0, 20);
-    scene.add(pointLight);
-
-    camera.position.z = 10;
-    container.style.opacity = '0.4';
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        const time = Date.now() * 0.001;
-
-        elements.forEach(element => {
-            element.position.y = element.userData.originalY + Math.sin(time * element.userData.speed) * 1.2;
-            element.position.x = element.userData.originalX + Math.cos(time * element.userData.speed * 0.7) * 1.2;
-
-            element.rotation.x += element.userData.rotationSpeed;
-            element.rotation.y += element.userData.rotationSpeed * 0.8;
-
-            const pulse = Math.sin(time * element.userData.speed * 1.2) * 0.15 + 1;
-            element.scale.setScalar(pulse);
-        });
-
-        camera.position.x = Math.sin(time * 0.05) * 2;
-        camera.position.z = 10 + Math.cos(time * 0.05) * 2;
-        camera.lookAt(scene.position);
-
-        renderer.render(scene, camera);
-    }
-
-    function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    window.addEventListener('resize', onWindowResize);
-
+    // Start animation
     animate();
 }
+
+// Create the stars
+function createStars() {
+    // Check if on mobile
+    const isMobile = window.innerWidth <= 768;
+    
+    // Adjust star parameters based on device
+    const starConfig = isMobile ? {
+        far: { count: 1200, size: 1.2, spread: 2000 },
+        mid: { count: 800, size: 1.4, spread: 1500 },
+        near: { count: 400, size: 1.6, spread: 1000 }
+    } : {
+        far: { count: 1500, size: 1.0, spread: 2000 },
+        mid: { count: 1000, size: 1.2, spread: 1500 },
+        near: { count: 500, size: 1.4, spread: 1000 }
+    };
+
+    // Create multiple layers of stars for depth
+    createStarLayer(starConfig.far.count, starConfig.far.size, starConfig.far.spread);
+    createStarLayer(starConfig.mid.count, starConfig.mid.size, starConfig.mid.spread);
+    createStarLayer(starConfig.near.count, starConfig.near.size, starConfig.near.spread);
+}
+
+function createStarLayer(count, size, spread) {
+    const geometry = new THREE.BufferGeometry();
+    const vertices = [];
+    const opacities = new Float32Array(count);
+    const isMobile = window.innerWidth <= 768;
+
+    // Create a more uniform distribution of stars
+    for (let i = 0; i < count; i++) {
+        const radius = spread * Math.random();
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+
+        const x = radius * Math.sin(phi) * Math.cos(theta);
+        const y = radius * Math.sin(phi) * Math.sin(theta);
+        const z = radius * Math.cos(phi);
+
+        vertices.push(x, y, z);
+        // Increase base opacity for mobile
+        opacities[i] = isMobile ? 
+            (0.5 + Math.random() * 0.5) : // Mobile: 0.5 to 1.0
+            (0.3 + Math.random() * 0.4);  // Desktop: 0.3 to 0.7
+    }
+
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.setAttribute('opacity', new THREE.Float32BufferAttribute(opacities, 1));
+
+    // Create a custom point material with enhanced glow
+    const material = new THREE.PointsMaterial({
+        size: size,
+        sizeAttenuation: true,
+        transparent: true,
+        opacity: isMobile ? 0.9 : 0.7, // Increased opacity for mobile
+        color: 0xFFFFFF,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+    });
+
+    const starLayer = new THREE.Points(geometry, material);
+    scene.add(starLayer);
+    
+    // Add the layer to the stars array for animation
+    if (!stars) stars = [];
+    stars.push({
+        mesh: starLayer,
+        opacities: opacities,
+        initialOpacities: opacities.slice(),
+        time: Math.random() * 1000
+    });
+}
+
+// Handle window resizing
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    // Recreate stars with appropriate settings for new screen size
+    while(scene.children.length > 0){ 
+        scene.remove(scene.children[0]); 
+    }
+    stars = [];
+    createStars();
+}
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+
+    // Animate each star layer
+    if (stars && stars.length) {
+        stars.forEach((layer, index) => {
+            // Rotate the layer
+            layer.mesh.rotation.y += 0.0001 * (index + 1);
+            layer.mesh.rotation.x += 0.00005 * (index + 1);
+
+            // Update star opacities for twinkling effect
+            layer.time += 0.005;
+            const opacities = layer.mesh.geometry.attributes.opacity.array;
+            for (let i = 0; i < opacities.length; i++) {
+                opacities[i] = layer.initialOpacities[i] * (0.7 + 0.3 * Math.sin(layer.time + i));
+            }
+            layer.mesh.geometry.attributes.opacity.needsUpdate = true;
+        });
+    }
+
+    renderer.render(scene, camera);
+}
+
+// Start everything after the page loads
+window.addEventListener('load', function() {
+    // Try to initialize
+    function tryInit() {
+        const container = document.getElementById('threejs-bg');
+        if (!container) {
+            console.log('Container not found, retrying...');
+            setTimeout(tryInit, 100);
+            return;
+        }
+        if (typeof THREE === 'undefined') {
+            console.log('Three.js not loaded, retrying...');
+            setTimeout(tryInit, 100);
+            return;
+        }
+        init();
+    }
+    tryInit();
+});
