@@ -167,3 +167,289 @@
     <script src="script.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devansh Rai's Portfolio</title>
+    <link rel="stylesheet" href="style.css">  
+    <link rel="icon" type="image/png" href="assets/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.ico" />
+    <script src="https://kit.fontawesome.com/22a88b6823.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Three.js Background Container -->
+    <div id="threejs-bg"></div>
+
+    <!-- Enhanced Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div class="matrix-terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="terminal-btn red"></span>
+                        <span class="terminal-btn yellow"></span>
+                        <span class="terminal-btn green"></span>
+                    </div>
+                    <span class="terminal-title">system_boot.exe</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">> Initializing portfolio...</div>
+                    <div class="terminal-line">> Loading core modules...</div>
+                    <div class="terminal-line">> Starting developer environment...</div>
+                    <div class="terminal-line">> Compiling portfolio components...</div>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                        <div class="progress-text">0%</div>
+                    </div>
+                    <div class="binary-rain"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Header Section -->
+    <header id="header">
+        <nav>
+            <img src="/assets/Logo.png" class="logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <i class="fas fa-times" id="menu-close" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" id="menu-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-container">
+            <div class="header-text">
+                <h1>Hi, I'm <span>Devansh</span></h1>
+                <h2 class="typing-effect">A Software Developer.</h2>
+                <p>I'm a Software Developer and an open-source enthusiast, <br> currently pursuing Computer Science at VIT and working as an SDE Intern at CeG, India.</p>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/devansh-rai-210149214/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/idevanshrai" target="_blank"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <div id="about" class="scroll-animation">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="/assets/Photo1.png">
+                </div>
+                <div class="about-col-2">
+                    <h1 class="sub-title">About Me</h1>
+                    <p>I'm a Computer Science undergrad who's worked across a bunch of tech stacks — from AI projects to web apps. I've dabbled in robotics, video editing, and poster design too. I previously handled social media at CodeDay Lucknow, where I got to blend creativity with community engagement. I enjoy building things that mix tech with design and solve real problems, whether it's through a clever piece of code or a clean user interface. I'm always up for learning something new, especially if it challenges me to think differently or pick up a new tool. For me, tech isn't just about building — it's about experimenting, iterating, and having fun along the way.</p>
+
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('education')">Educational Experience</p>
+                        <p class="tab-links" onclick="opentab('experience')">Professional Experience</p>
+                    </div>
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li><span>Software Development</span><br>Experienced in Java, Python, C++, and building dynamic Web and App solutions. Passionate about full-stack development and AI-driven applications.</li>
+                            <li><span>UI/UX Design</span><br>Creating seamless and visually engaging web interfaces, blending functionality with aesthetic appeal.</li>
+                            <li><span>Visual Media Production</span><br>Skilled in photography, video editing, and crafting digital content that tells impactful stories.</li>
+                            <li><span>Robotics</span><br>Designing and building functional robots with a focus on automation and innovative problem-solving.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>2024 - Present</span><br>Google Developer Group- Student Developer</li>
+                            <li><span>2024 - Present</span><br>CodeDay Lucknow- Social Media Manager & Volunteer</li>
+                            <li><span>2024 - Present</span><br>IoT Club | VIT | Core Member</li>
+                            <li><span>2024 - Present</span><br>Eureka Club | VIT | Core Member</li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li>
+                                <span>2023 - 2027</span><br>
+                                <strong>Vellore Institute of Technology</strong><br>
+                                I'm a Sophomore year student, pursuing Bachelor of Technology in Computer Science at Vellore Institute of Technology.
+                            </li>
+                            <li>
+                                <span>2021 - 2023</span><br>
+                                <strong>Schooling from City Montessori Inter College</strong>
+                                <span class="percentage">92.0%</span><br>
+                                Between 2021 and 2023, I was fortunate to take on numerous leadership and organizational responsibilities at City Montessori School, Lucknow, India.
+                            </li>
+                            <li>
+                                <span>2019 - 2021</span><br>
+                                <strong>Schooling from City Montessori Inter College</strong>
+                                <span class="percentage">94%</span><br>
+                                During the 2019-2020 academic period at City Montessori School, Lucknow, India, I engaged in a diverse range of activities that contributed significantly to my personal and academic growth.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div id="services" class="scroll-animation">
+        <div class="container">
+            <h1 class="sub-title">What I do</h1>
+            <div class="services-list">
+                <div>
+                    <i class="fa-solid fa-code"></i>
+                    <h2>Software Developement</h2>
+                    <p>AAs an aspiring software developer, I'm committed to mastering diverse programming languages and technologies to craft efficient, scalable, and user-centric software solutions that address real-world problems.</p>
+                    <a href="https://github.com/idevanshrai" target="_blank">Learn more</a>
+                </div>
+                <div>
+                    <i class="fa-brands fa-android"></i>
+                    <h2>Robotics</h2>
+                    <p>Designed and built autonomous robots using Arduino and Raspberry Pi, leveraging Python and C++ for advanced control and automation.</p>
+                    <a href="https://github.com/idevanshrai" target="_blank">Learn more</a>
+                </div>
+                <div>
+                    <i class="fa-solid fa-camera-retro"></i>
+                    <h2>Photography</h2>
+                    <p>PA passionate photographer with a sharp eye for detail, skilled in various styles and techniques. Experienced in using professional equipment and editing software to capture and enhance stunning visuals.</p>
+                    <a href="https://www.instagram.com/_the_lost_album_/" target="_blank">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Section -->
+    <div id="portfolio" class="scroll-animation">
+        <div class="container">
+            <h1 class="sub-title">My Portfolio</h1>
+            <div class="work-list">
+                <div class="work">
+                    <img src="/assets/imgA.png">
+                    <div class="layer">
+                        <h3>Moodify</h3>
+                        <p>Moodify is a web-based app that assesses user mood through a questionnaire and provides personalized Spotify playlists based on mood and language preferences.</p>
+                        <a href="https://github.com/idevanshrai/Moodify"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="/assets/imgB.png">
+                    <div class="layer">
+                        <h3>RoadVision</h3>
+                        <p>An AI-powered web application designed to detect and recognize license plates from images. It can identify speeding violations by comparing timestamps from multiple camera points and stores all data with visual proof for verification.</p>
+                        <a href="https://github.com/idevanshrai/RoadVision"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="/assets/imgC.png">
+                    <div class="layer">
+                        <h3>Docker Builder</h3>
+                        <p>A lightweight and efficient Docker-based build system using YAML, Python, and Docker to automate the creation of Docker images for your codebase.</p>
+                        <a href="https://github.com/idevanshrai/Docker-Builder"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="/assets/imgD.png">
+                    <div class="layer">
+                        <h3>GestureTune</h3>
+                        <p>This project allows users to control the volume of their audio devices using simple hand gestures. By leveraging computer vision techniques.</p>
+                        <a href="https://github.com/idevanshrai/Gesture-Volume-Control"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--GitHub Stat Section-->
+    
+ <div id="github-feed" class="scroll-animation">
+    <div class="container">
+        <h1 class="sub-title">My GitHub Activity</h1>
+        <div class="github-container">
+            <div class="github-stats">
+                <h3>GitHub Stats</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fa-solid fa-code-commit"></i>
+                        <span id="total-commits">0</span>
+                        <p>Total Commits</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fa-solid fa-code-branch"></i>
+                        <span id="total-repos">0</span>
+                        <p>Public Repos</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fa-solid fa-star"></i>
+                        <span id="total-stars">0</span>
+                        <p>Total Stars</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fa-solid fa-code-pull-request"></i>
+                        <span id="total-prs">0</span>
+                        <p>Pull Requests</p>
+                    </div>
+                </div>
+            </div>
+            <div class="github-activity">
+                <h3>Recent Activity</h3>
+                <div class="activity-feed" id="activity-feed">
+                    <!-- Activity items will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+    <!-- Resume Section -->
+    <div id="resume" class="scroll-animation">
+        <div class="resume-content">
+            <h1>My Resume</h1>
+            <a href="/assets/RESUME.pdf" download class="download-btn">
+                <i class="fas fa-download"></i> Download CV
+            </a>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="scroll-animation">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title">Contact Me</h1>  
+                    <p><i class="fa-solid fa-paper-plane"></i> idevanshrai@gmail.com</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/devansh-rai-210149214/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/idevanshrai" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>        
+                <div class="contact-right"> 
+                    <form name="submit-to-google-sheet">
+                        <input type="text" name="Name" placeholder="Your name" required>
+                        <input type="E-Mail" name="E-Mail" placeholder="Your E-Mail" required>
+                        <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright © 2024 Devansh - All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="three.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
