@@ -1,318 +1,181 @@
-// Splash Screen Animation
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Three.js background immediately and ensure it's visible
-    if (typeof initThreeJSBackground === 'function') {
-        console.log('Initializing Three.js background...');
-        initThreeJSBackground();
-    } else {
-        console.error('Three.js initialization function not found!');
+    // ---- UI ELEMENT SELECTORS ---- //
+    const UI = {
+        splashScreen: document.getElementById('splash-screen'),
+        splashProgressBar: document.querySelector('#splash-screen .progress-bar'),
+        glitchOverlays: document.querySelectorAll('.glitch-overlay'),
+        cursor: document.querySelector('.cursor'),
+        cursorFollower: document.querySelector('.cursor-follower'),
+        typingEffect: document.querySelector(".typing-effect"),
+        nav: document.querySelector('nav'),
+        sidemenu: document.getElementById("sidemenu"),
+        menuBars: document.getElementById("menu-bars"),
+        menuClose: document.getElementById("menu-close"),
+        projectContainer: document.getElementById('work-list-container'),
+    };
+
+    // ---- INITIALIZATION ---- //
+    initSplashAnimation();
+    initThreeJSBackground();
+    fetchGitHubData();
+    fetchAndDisplayProjects();
+
+    // ---- Glitch Splash Screen Animation ---- //
+    function initSplashAnimation() {
+        const mainText = UI.glitchOverlays[0].parentElement.getAttribute('data-text');
+        UI.glitchOverlays.forEach(overlay => {
+            overlay.setAttribute('data-text', mainText);
+        });
+
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 1;
+            UI.splashProgressBar.style.width = `${progress}%`;
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    UI.splashScreen.style.opacity = '0';
+                    UI.splashScreen.style.visibility = 'hidden';
+                    UI.cursor.classList.add('visible');
+                    UI.cursorFollower.classList.add('visible');
+                }, 500);
+            }
+        }, 20);
     }
 
-    const splashScreen = document.getElementById('splash-screen');
-    const progressBar = document.querySelector('.progress-bar');
-    const terminalLines = document.querySelectorAll('.terminal-line');
-
-    // Typing effect
-    const typingElement = document.querySelector(".typing-effect");
-    const texts = ["A Software Developer.", "A CS Student.", "A Human."];
-    let index = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typingSpeed = 60;
-    const deletingSpeed = 65;
-    const delayBetweenTexts = 600;
-    const delayBeforeDeleting = 1000;
-
+    // ---- Typing Effect ---- //
+    const texts = ["A Software Developer.", "A CS Student.", "An Open-Source Enthusiast."];
+    let textIndex = 0, charIndex = 0, isDeleting = false;
     function type() {
-        const currentText = texts[index];
-
+        const currentText = texts[textIndex];
         if (!isDeleting && charIndex < currentText.length) {
-            typingElement.textContent = currentText.substring(0, charIndex + 1);
-            charIndex++;
-            setTimeout(type, typingSpeed);
+            UI.typingEffect.textContent = currentText.substring(0, charIndex + 1); charIndex++; setTimeout(type, 80);
         } else if (isDeleting && charIndex > 0) {
-            typingElement.textContent = currentText.substring(0, charIndex - 1);
-            charIndex--;
-            setTimeout(type, deletingSpeed);
+            UI.typingEffect.textContent = currentText.substring(0, charIndex - 1); charIndex--; setTimeout(type, 40);
         } else if (!isDeleting && charIndex === currentText.length) {
-            setTimeout(() => {
-                isDeleting = true;
-                type();
-            }, delayBeforeDeleting);
+            setTimeout(() => { isDeleting = true; type(); }, 2000);
         } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            index = (index + 1) % texts.length;
-            setTimeout(type, delayBetweenTexts);
+            isDeleting = false; textIndex = (textIndex + 1) % texts.length; setTimeout(type, 500);
+        }
+    }
+    setTimeout(type, 3000);
+
+    // ---- Simplified Portfolio Logic (with Serverless Function) ---- //
+    async function fetchAndDisplayProjects() {
+        try {
+            // IMPORTANT: This now points to your serverless function
+            const response = await fetch('/api/github');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const repos = await response.json();
+            
+            const latestProjects = repos.filter(repo => !repo.fork && repo.description).slice(0, 6);
+
+            UI.projectContainer.innerHTML = '';
+            
+            latestProjects.forEach(repo => {
+                const projectElement = document.createElement('div');
+                projectElement.className = 'work';
+                projectElement.innerHTML = `
+                    <div class="work-icon">${getIconForCategory(repo.topics)}</div>
+                    <div class="layer">
+                        <h3>${repo.name.replace(/-/g, ' ')}</h3>
+                        <p>${repo.description}</p>
+                        <a href="${repo.html_url}" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                `;
+                UI.projectContainer.appendChild(projectElement);
+            });
+        } catch (error) {
+            console.error('Error fetching projects:', error);
+            UI.projectContainer.innerHTML = '<p class="loading-text">Could not load projects. API limit likely reached.</p>';
         }
     }
 
-    setTimeout(type, 1000);
+    function getIconForCategory(topics) {
+        if (topics.includes('web-app')) return '<i class="fas fa-globe"></i>';
+        if (topics.includes('ai-ml') || topics.includes('ai')) return '<i class="fas fa-brain"></i>';
+        if (topics.includes('robotics')) return '<i class="fas fa-robot"></i>';
+        if (topics.includes('cli') || topics.includes('automation')) return '<i class="fas fa-terminal"></i>';
+        return '<i class="fas fa-code"></i>';
+    }
 
-    // GitHub Feed Functionality
+    // ---- GitHub Activity Fetcher ---- //
     async function fetchGitHubData() {
         try {
-            // Fetch user data
             const userResponse = await fetch('https://api.github.com/users/idevanshrai');
             const userData = await userResponse.json();
-            
-            // Fetch events data
-            const eventsResponse = await fetch('https://api.github.com/users/idevanshrai/events/public');
-            const eventsData = await eventsResponse.json();
-            
-            // Update stats
             document.getElementById('total-repos').textContent = userData.public_repos;
-            
-            // Process events to get commit count, PRs, etc.
-            let commitCount = 0;
-            let prCount = 0;
-            let starCount = 0;
-            
-            eventsData.forEach(event => {
-                if (event.type === 'PushEvent') {
-                    commitCount += event.payload.commits.length;
-                } else if (event.type === 'PullRequestEvent') {
-                    prCount++;
-                } else if (event.type === 'WatchEvent') {
-                    starCount++;
-                }
+            const eventsResponse = await fetch('https://api.github.com/users/idevanshrai/events/public');
+            const events = await eventsResponse.json();
+            let commitCount = 0, prCount = 0, starCount = 0;
+            events.forEach(e => {
+                if (e.type === 'PushEvent') commitCount += e.payload.commits.length;
+                if (e.type === 'PullRequestEvent' && e.payload.action === 'opened') prCount++;
+                if (e.type === 'WatchEvent') starCount++;
             });
-            
             document.getElementById('total-commits').textContent = commitCount;
             document.getElementById('total-prs').textContent = prCount;
             document.getElementById('total-stars').textContent = starCount;
-            
-            // Display recent activity (last 5 events)
             const activityFeed = document.getElementById('activity-feed');
             activityFeed.innerHTML = '';
-            
-            const recentEvents = eventsData.slice(0, 5);
-            
-            recentEvents.forEach(event => {
+            events.slice(0, 5).forEach(event => {
+                let icon, type, repo = event.repo.name.split('/')[1];
+                switch(event.type) {
+                    case 'PushEvent': icon = '<i class="fa-solid fa-code-commit"></i>'; type = `Pushed ${event.payload.commits.length} commit(s)`; break;
+                    case 'PullRequestEvent': icon = '<i class="fa-solid fa-code-pull-request"></i>'; type = `${event.payload.action} PR`; break;
+                    case 'WatchEvent': icon = '<i class="fa-solid fa-star"></i>'; type = 'Starred repo'; break;
+                    default: icon = '<i class="fa-solid fa-code"></i>'; type = event.type.replace('Event', '');
+                }
                 const activityItem = document.createElement('div');
                 activityItem.className = 'activity-item';
-                
-                let icon = '';
-                let type = '';
-                let repo = event.repo.name.split('/')[1];
-                let date = new Date(event.created_at).toLocaleDateString();
-                
-                switch(event.type) {
-                    case 'PushEvent':
-                        icon = '<i class="fa-solid fa-code-commit"></i>';
-                        type = `Pushed ${event.payload.commits.length} commit${event.payload.commits.length > 1 ? 's' : ''}`;
-                        break;
-                    case 'PullRequestEvent':
-                        icon = '<i class="fa-solid fa-code-pull-request"></i>';
-                        type = `${event.payload.action} pull request`;
-                        break;
-                    case 'WatchEvent':
-                        icon = '<i class="fa-solid fa-star"></i>';
-                        type = 'Starred repository';
-                        break;
-                    case 'CreateEvent':
-                        icon = '<i class="fa-solid fa-plus"></i>';
-                        type = `Created ${event.payload.ref_type}`;
-                        break;
-                    case 'ForkEvent':
-                        icon = '<i class="fa-solid fa-code-fork"></i>';
-                        type = 'Forked repository';
-                        break;
-                    default:
-                        icon = '<i class="fa-solid fa-code"></i>';
-                        type = event.type;
-                }
-                
-                activityItem.innerHTML = `
-                    <div class="activity-icon">${icon}</div>
-                    <div class="activity-details">
-                        <div class="activity-type">${type} in <span class="activity-repo">${repo}</span></div>
-                        <div class="activity-date">${date}</div>
-                    </div>
-                `;
-                
+                activityItem.innerHTML = `<div class="activity-icon">${icon}</div><div class="activity-details"><div class="activity-type">${type} in <span class="activity-repo">${repo}</span></div><div class="activity-date">${new Date(event.created_at).toLocaleDateString()}</div></div>`;
                 activityFeed.appendChild(activityItem);
             });
-            
-        } catch (error) {
-            console.error('Error fetching GitHub data:', error);
-            document.getElementById('github-feed').innerHTML = `
-                <div class="container">
-                    <h1 class="sub-title">My GitHub Activity</h1>
-                    <p style="text-align: center; color: #ff004f;">Unable to load GitHub data at this time.</p>
-                </div>
-            `;
-        }
+        } catch (error) { console.error('Error fetching GitHub data:', error); }
     }
     
-    fetchGitHubData();
-
-    // Mobile menu functionality
-    window.openmenu = function() {
-        document.getElementById("sidemenu").style.right = "0";
-        document.getElementById("menu-close").style.display = "block";
-        document.getElementById("menu-bars").style.display = "none";
-    }
-
-    window.closemenu = function() {
-        document.getElementById("sidemenu").style.right = "-200px";
-        document.getElementById("menu-close").style.display = "none";
-        document.getElementById("menu-bars").style.display = "block";
-    }
-
-    // Animate terminal lines
-    terminalLines.forEach((line, index) => {
-        setTimeout(() => {
-            line.style.opacity = '1';
-            line.style.transform = 'translateY(0)';
-        }, 500 * (index + 1));
-    });
-
-    // Animate progress bar
-    let progress = 0;
-    const progressInterval = setInterval(() => {
-        progress += Math.random() * 10;
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(progressInterval);
-
-            // Hide splash screen after delay
-            setTimeout(() => {
-                splashScreen.style.opacity = '0';
-                setTimeout(() => {
-                    splashScreen.style.display = 'none';
-                }, 1000);
-            }, 500);
-        }
-        progressBar.style.width = `${progress}%`;
-        document.querySelector('.progress-text').textContent = `${Math.round(progress)}%`;
-    }, 100);
-
-    // Initialize custom cursor
-    const cursor = document.querySelector('.cursor');
-    const cursorFollower = document.querySelector('.cursor-follower');
-
-    // Track mouse position
-    let mouseX = 0, mouseY = 0;
-    let posX = 0, posY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    // Smooth cursor animation
-    function updateCursor() {
-        posX += (mouseX - posX) / 5;
-        posY += (mouseY - posY) / 5;
-
-        cursor.style.left = `${posX}px`;
-        cursor.style.top = `${posY}px`;
-
-        cursorFollower.style.left = `${mouseX}px`;
-        cursorFollower.style.top = `${mouseY}px`;
-
-        requestAnimationFrame(updateCursor);
-    }
-
-    updateCursor();
-
-    // Cursor hover effects
-    const hoverElements = document.querySelectorAll('a, button, .tab-links, .work, input, textarea');
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform = 'scale(1.5)';
-            cursor.style.backgroundColor = 'rgba(255, 0, 79, 0.5)';
-            cursor.style.borderColor = 'transparent';
-            cursorFollower.style.transform = 'scale(2)';
-        });
-
-        el.addEventListener('mouseleave', () => {
-            cursor.style.transform = 'scale(1)';
-            cursor.style.backgroundColor = 'transparent';
-            cursor.style.borderColor = '#ff004f';
-            cursorFollower.style.transform = 'scale(1)';
-        });
-    });
-
-    // Scroll animations
-    const scrollElements = document.querySelectorAll('.scroll-animation');
-
+    // ---- SCROLL & INTERSECTION OBSERVER ---- //
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-            }
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('animate'); });
     }, { threshold: 0.1 });
-
-    scrollElements.forEach(el => observer.observe(el));
-
-    // Tab functionality
-    window.opentab = function(event, tabname) {
-        const tablinks = document.getElementsByClassName("tab-links");
-        for (let i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active-link");
-        }
-
-        const tabcontents = document.getElementsByClassName("tab-contents");
-        for (let i = 0; i < tabcontents.length; i++) {
-            tabcontents[i].classList.remove("active-tab");
-        }
-
-        event.currentTarget.classList.add("active-link");
-        document.getElementById(tabname).classList.add("active-tab");
-    }
-
-    // Form submission
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzAOcBA4M9ZNiW709so-2tWpugf-O2V32TbN6je8VNrsMc7RO4ba7giwuEZe2gVPDr5/exec';
-    const form = document.forms['submit-to-google-sheet'];
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-            .then(response => {
-                alert('Message sent successfully!');
-                form.reset();
-            })
-            .catch(error => console.error('Error!', error.message));
-    });
-
-    // Button Fix
-    const tabButtons = document.querySelectorAll('.tab-links');
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function (e) {
-            const tabText = this.textContent.trim().toLowerCase();
-            let tabName = '';
-
-            if (tabText.includes('educational experience')) {
-                tabName = 'education';
-            } else if (tabText.includes('professional experience')) {
-                tabName = 'experience';
-            } else if (tabText.includes('skills')) {
-                tabName = 'skills';
-            }
-
-            if (tabName) {
-                opentab(e, tabName);
-            } else {
-                console.error('Tab name could not be matched.');
-            }
-        });
-    });
-
-    // Navigation scroll behavior
-    const nav = document.querySelector('nav');
+    document.querySelectorAll('.scroll-animation').forEach(el => observer.observe(el));
     
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
+        if (window.innerWidth <= 768) return;
+        document.querySelectorAll('.parallax-item').forEach(item => {
+            const speed = -0.1;
+            const yPos = (item.getBoundingClientRect().top - window.innerHeight / 2) * speed;
+            item.style.transform = `translateY(${yPos}px)`;
+        });
     });
 
-    // Initial check for page load
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
+    // ---- NAVIGATION & MENU ---- //
+    UI.menuBars.addEventListener('click', () => UI.sidemenu.classList.add('active'));
+    UI.menuClose.addEventListener('click', () => UI.sidemenu.classList.remove('active'));
+    window.addEventListener('scroll', () => UI.nav.classList.toggle('scrolled', window.scrollY > 50));
+
+    // ---- CURSOR & MAGNETIC EFFECT ---- //
+    let mouseX = 0, mouseY = 0, posX = 0, posY = 0;
+    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+    function updateCursor() {
+        UI.cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px)`;
+        posX += (mouseX - posX) / 8;
+        posY += (mouseY - posY) / 8;
+        UI.cursorFollower.style.transform = `translate(${posX - 5}px, ${posY - 5}px)`;
+        requestAnimationFrame(updateCursor);
     }
+    updateCursor();
+    
+    document.querySelectorAll('.magnetic-link').forEach(link => {
+        link.addEventListener('mousemove', e => {
+            const rect = link.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            link.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.1)`;
+        });
+        link.addEventListener('mouseleave', () => { link.style.transform = 'translate(0, 0) scale(1)'; });
+    });
 });
