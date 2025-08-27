@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ---- Typing Effect ---- //
-    const texts = ["A Software Developer.", "A CS Student.", "A Human."];
+    const texts = ["A Software Dev.", "A CS Student.", "A Human."];
     let textIndex = 0, charIndex = 0, isDeleting = false;
     function type() {
         const currentText = texts[textIndex];
