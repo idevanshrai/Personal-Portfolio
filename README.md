@@ -46,12 +46,6 @@ Welcome to my portfolio! This project is a digital representation of who I am as
 
 ---
 
-## 🤝 Contributing
-
-Want to make it better or adapt it for yourself? Go for it!  
-Fork this repo, create a new branch, make your changes, and open a pull request.
-
----
 
 ## 📄 License
 
